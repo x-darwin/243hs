@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  
+  --primary: 176 73% 49%;
+  --primary-foreground: 210 40% 98%;
+  
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222 47% 11%;
+  
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  
+  --accent: 176 73% 49%;
+  --accent-foreground: 222 47% 11%;
+  
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 176 73% 49%;
+  
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  
+  --card: 222 47% 11%;
+  --card-foreground: 210 40% 98%;
+  
+  --popover: 222 47% 11%;
+  --popover-foreground: 210 40% 98%;
+  
+  --primary: 176 73% 49%;
+  --primary-foreground: 222 47% 11%;
+  
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  
+  --accent: 176 73% 49%;
+  --accent-foreground: 210 40% 98%;
+  
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 176 73% 49%;
+}
+
+@layer base {
+  * {
+    @apply border-[hsl(var(--border))];
+  }
+  body {
+    @apply bg-background text-foreground antialiased min-h-screen flex flex-col;
+  }
+  main {
+    @apply flex-grow;
+  }
+}
+
+@layer components {
+  .glassmorphism {
+    @apply bg-white/90 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl;
+  }
+
+  .button-glow {
+    @apply relative overflow-hidden;
+  }
+
+  .button-glow::after {
+    @apply content-[''] absolute inset-0 z-[-1] bg-gradient-to-r from-primary/50 to-accent/50 blur-xl opacity-0 transition-opacity duration-500;
+  }
+
+  .button-glow:hover::after {
+    @apply opacity-100;
+  }
+}
+
+@layer utilities {
+  .animate-infinite-scroll {
+    animation: infinite-scroll 30s linear infinite;
+  }
+
+  .pause {
+    animation-play-state: paused;
+  }
+
+  @keyframes infinite-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-50% - 3rem)); }
+  }
+
+  @keyframes tada {
+    0% { transform: scale(1); }
+    10%, 20% { transform: scale(0.9) rotate(-3deg); }
+    30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
+    40%, 60%, 80% { transform: scale(1.1) rotate(-3deg); }
+    100% { transform: scale(1) rotate(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-infinite-scroll {
+      animation: none;
+    }
+  }
+
+  .container {
+    @apply px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl;
+  }
+}
